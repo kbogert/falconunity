@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\Users\Kenneth Bogert\Documents\IPS_REN_13\Assets\Scripts\Cranial Nerve\Tools\CranialNerveTool.cs">
+    <Files>
+      <File FileName="..\..\Users\Kenneth Bogert\Documents\IPS_REN_13\Assets\Scripts\Cranial Nerve\Tools\HandTool.cs" Line="10" Column="1" />
+      <File FileName="..\..\Users\Kenneth Bogert\Documents\IPS_REN_13\Assets\Scripts\Cranial Nerve\Tools\SoapTool.cs" Line="37" Column="17" />
+      <File FileName="..\..\Users\Kenneth Bogert\Documents\IPS_REN_13\Assets\Scripts\Cranial Nerve\Tools\TouchableTool.cs" Line="1" Column="1" />
+      <File FileName="..\..\Users\Kenneth Bogert\Documents\IPS_REN_13\Assets\Scripts\Cranial Nerve\Tools\CranialNerveTool.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

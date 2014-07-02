@@ -1,0 +1,154 @@
+The Incredibly Compily Build - In Depth
+=======================================
+Kyle Machulis <kyle@nonpolynomial.com>
+Version 1.0.0, August 30, 2009
+
+== Description ==
+
+Compily Buildd is a compilation of python scripts and cmake functions that I've put together over a few years of building cross platform software, mainly of the driver/hardware interaction variety. It relies on cmake for all of the project generation, and python to do things like git version fetching, cmake command line creation, and other utilties that would be annoying if not impossible to do in cmake. 
+
+While the system is certainly helpful to anyone who needs to quickly build and cross-compile for multiple platforms out of the same source root, only the absolute minimal cmake portions are needed for building any Nonpolynomial Labs project. This build system ships with every release of any NP Labs project.
+
+The hope is that if someone really wants to use this system for their own build projects, they can, but otherwise it should stay small and lightweight enough to be shipped with projects and stay out of the way otherwise. I can't really claim this documentation is complete, though it should at least be correct. But, if you've made it this far, you probably want to know more, so I'll shut up and get on with it.
+
+== Requirements ==
+
+=== cmake ===
+
+http://www.cmake.org
+
+=== python (optional)  ===
+
+Used for build target creation, git version updates, etc... Not required for building projects with the system, but nice to have if you plan to use this for development..
+
+http://www.python.org
+
+== Compily Buildd Workflow (From Scratch) ==
+
+So, you've decided you want to use Compily Buildd with a project, either a NP Labs projects, or something of your own. Here's what the workflow would be to start from scratch, in excrusiating detail:
+
+- Make a base directory that all repositories will go in
+- Make a library directory in the base directory, and fill it with specific libraries for the platforms you plan to build against
+- Check out the compily_buildd repository in the base directory
+- Start checking out other repositories in the base directory
+- Descend into a repository and run the target forming script
+- Go into the build directory and build with whatever generator you specified
+
+The rest of this document is a breakdown of the design of this workflow.
+
+== Repository Layout using Compily Buildd ==
+
+Here's how I usually set up my build directories for multi project development
+
+--------------------------------------
+|- build
+|-- compily_buildd [the repo containing the Compily Buildd system code]
+|-- library [This is where platform specific libraries go, same layout as a /usr directory]
+|--- usr_windows_mingw4_x86
+|---- include
+|---- lib
+|---- bin
+|--- usr_darwin_10.5_x86
+|---- ... [same layout as above]
+|--- ... [one directory for all platforms I will need to compile with on this build directory]
+|-- [project name - each project root goes here, i.e. ...]
+|-- libnifalcon
+|--- build_darwin_10.5_x86_release_static (a Compily Buildd generated build directory)
+|--- build_windows_mingw4_x86_release_shared (another Compily Buildd generated build directory)
+|-- libtrancevibe
+|-- ...
+--------------------------------------
+
+So, when I check out a system that uses Compily Buildd, it first checks to see if the compily_buildd directory is available in the directory below its root. If it's not there, then it checks to see if compily_buildd is included in the repo itself (every NP Labs repo has a git submodule that uses compily buildd, and every NP Labs software release comes with the version of Compily Buildd current to that release, so it should 'just work'). If it can't find compily_buildd, then cmake throws an error telling where to get it.
+
+== Target Forming ==
+
+Build directories in a Compily Build system take on the following format
+
+--------------------------------------
+build_[platform]_[build type]_[link type]_[other]
+--------------------------------------
+
+Where:
+
+- platform - The operating system and compiler to use, i.e. windows_vs9, windows_mingw4, darwin_10.5_gcc, darwin_10.5_xcode, etc... Yes, this is a meta layer on top of the generators for cmake, I realize :)
+- build type - Release, Debug, RelWithDebInfo, etc... Only one of these types per build directory
+- link type - Static or shared. Only one of these types per build directory
+- other - So far, only used for distcc.
+
+To set up all of these bindings are form the proper cmake line, there's a script in the python directory called compile_driver.py. It sounds like a wrestling move, and hopefully some day this build system will become so popular that there will be a build system themed pro wrestler who will use it as one. Yeah.
+
+So, for instance, if you want to build a makefile based static release set of binaries and libraries on OS X 10.5 on Intel and you have python installed, you'd do a
+
+--------------------------------------
+../compily_buildd/python/compile_driver.py darwin_10.5_x86_release_static
+--------------------------------------
+
+and the build system would create the directory
+
+--------------------------------------
+[project root]/build_darwin_10.5_x86_release_static
+--------------------------------------
+
+and would then create the CMake initialization line to fill that directory with the needed files, which for examples sake would look like
+
+--------------------------------------
+cmake -G "Unix Makefiles" -DBUILDSYS_BUILD_VARS_REQUIRED=ON -DBUILDSYS_BUILD_PLATFORM=darwin_10.5_x86 -DBUILDSYS_BUILD_DIR=build_darwin_10.5_x86_release_static -DBUILD_SHARED=OFF -DBUILD_STATIC=ON -DCMAKE_BUILD_TYPE=Release ..
+--------------------------------------
+
+Here's what the various parts of that mean:
+
+- BUILDSYS_BUILD_VARS_REQUIRED
+-- This tells the build system to throw errors if any of our required build variables (BUILDSYS_*) are missing, and to run certain commands to make sure that we fill in search paths correctly if they are included
+- BUILDSYS_BUILD_PLATFORM 
+-- This variable is used to create the library directory name, i.e. usr_darwin_10.5_x86. We look for all of our libraries there first before searching the rest of the system
+- BUILDSYS_BUILD_DIR
+-- The directory cmake will generate everything in and that we'll use for intermediate build files and output
+- BUILD_SHARED
+-- Whether or not we should build shared objects
+- BUILD_STATIC
+-- Whether or not we should build static objects
+- CMAKE_BUILD_TYPE
+-- Type of build to create. Regardless of IDE or command line, each directory can only build one type at the moment.
+- ..
+-- We're actually in the build_..._static directory at this point, and the main CMakeLists.txt file will always be in the repo root. So, we specify that directory as the source directory for cmake to start in. This is known as an Out-Of-Source build, since none of the intermediate build files are created in the source tree, leaving it nice and clean, with easy cleanup (rm -rf build_* from the repo root).
+
+== The TargetBuilder object and support for additional IDEs ==
+
+Since Compily Buildd was put together with me in mind, the targets in TargetBuilder.py encompass only what I use for development, which is usually makefiles on mac/linux/mingw, and visual studio or nmake on windows. If you use another IDE, like Xcode, you can most likely just generate a makefile target, copy the cmake line used, and switch out the generator. The compile_driver script will print out the cmake line it generates, so it's easy to copy and paste, and target directories really only need to be recreated when large changes have been made that would invalidate the CMake Cache.
+
+== Compily Buildd Components ==
+
+=== Cmake Scripts ===
+
+The CMake portion of Compily Buildd consists of 3 main scripts:
+
+- BuildSysCMakeLib.cmake - The file included by outside projects. Contains the INITIALIZE_PROJECT() macro and include all other cmake files.
+- CMakeOptions.cmake - Options for cmake building that can be turned on and off using command line defines, ccmake, or cmake-gui. Mostly compiler options (-ffast-math, debug messages, etc...).
+- CMakeFunctions.cmake - Functions for building libraries and executables. Mainly wrappers for oft-used library/executable target functions. The functions here are by no means an end-all solution for cmake target building, but they do everything I need pretty well.
+
+=== Python Scripts ===
+
+The python portion of Compily Buildd is mostly helper scripts:
+
+- TargetBuilder.py - Object that puts together the cmake build line, as explained in the Target Forming section
+- compile_driver.py - Finds the target builder module and passes the command line options to it.
+- get_version.py - Outputs a special C header file with get information, for compiling version and compile time information into binaries
+
+== Why is it called Compily Buildd? ==
+
+Basically, I really hate naming things.
+
+My old build system repo was called build_sys. It's usually managed outside of the directory I'm building in myself because all my projects use it. However, when distributing source, that becomes a subdirectory (to include all the needed build scripts with the distro), which means it's linked off the project repo's root, i.e. [project name]/build_sys
+
+Unfortunately, my build scripts create platform and build specific directories that start with build_* too, i.e. build_darwin_10.5_x86_release_static_distcc (yes I'm that long winded, you try dealing with single source heavily cross platform cross compiled development with a single directory named 'build' and see how long it takes you to start doing it, too)
+
+The easiest way to do a development clean on a project root is 'rm -rf build_*', which would also take out the build system itself if someone was building from an archive.
+
+I was thinking about naming it compile_system, but that's kinda eh (and if there's anything a build system doesn't need more of, it's eh), and not something I could really tell people to search for when talking to them.
+
+So, now, it's called "Compily Buildd" (or compily_buildd as the repo/dir name), named after the "Incredible Drivy Runn" level in the SkullMonkeys video game. The level video is available at:
+
+http://www.youtube.com/watch?v=EzZiyAXbe3g
+
+

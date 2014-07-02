@@ -1,0 +1,8 @@
+<area shape="rect" href="$_falcon_device_8h.html" title="local/libnifalcon&#45;1.0.1/include/falcon/core/FalconDevice.h" alt="" coords="553,84,945,111">
+<area shape="rect" href="$_falcon_kinematic_stamper_8h.html" title="local/libnifalcon&#45;1.0.1/include/falcon/kinematic/FalconKinematicStamper.h" alt="" coords="1156,84,1663,111">
+<area shape="rect" href="$_falcon_c_l_i_base_8h.html" title="local/libnifalcon&#45;1.0.1/include/falcon/util/FalconCLIBase.h" alt="" coords="5,161,397,188">
+<area shape="rect" href="$_falcon_device_boost_thread_8h.html" title="local/libnifalcon&#45;1.0.1/include/falcon/util/FalconDeviceBoostThread.h" alt="" coords="421,161,891,188">
+<area shape="rect" href="$_falcon_device_8cpp.html" title="local/libnifalcon&#45;1.0.1/src/core/FalconDevice.cpp" alt="" coords="915,161,1253,188">
+<area shape="rect" href="$_falcon_c_l_i_base_8cpp.html" title="local/libnifalcon&#45;1.0.1/src/util/FalconCLIBase.cpp" alt="" coords="33,239,369,265">
+<area shape="rect" href="$_falcon_device_boost_thread_8cpp.html" title="local/libnifalcon&#45;1.0.1/src/util/FalconDeviceBoostThread.cpp" alt="" coords="448,239,864,265">
+<area shape="rect" href="$_falcon_kinematic_stamper_8cpp.html" title="local/libnifalcon&#45;1.0.1/src/kinematic/FalconKinematicStamper.cpp" alt="" coords="1277,161,1728,188">

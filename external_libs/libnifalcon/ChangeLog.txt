@@ -1,0 +1,144 @@
+libnifalcon ChangeLog
+=====================
+Numbers refer to bug listings for libnifalcon bug tracking system
+
+2009-09-20 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1.0.1
+	* Fixed bug with connecting to/using multiple falcons using libusb communications
+	* Added adjusted geometry measurements by Niall Begley
+	* Fixed bug with reloading firmware through reused FalconDevice object
+	* Added ability to test multiple falcons to findfalcons
+	* Added findfalcons_multi example to test multiple falcons with simultanious access
+2009-09-06 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1.0 Final
+	* Upgraded build system support to work with new Compily Buildd system (http://www.github.com/qdot/compily_buildd)
+	* Integrated Alastair Barrow's new kinematics core based on the RL Stamper paper (replacing Kevin Ouellet's implementation)
+	* Added SWIG support with python and java builds and examples
+	* Removed libftdi support since libusb 1.0 works on all platforms and libftdi is the only library using non-polling updates
+	* Defaulted comm libraries in FalconDevice (ftd2xx on windows, libusb-1.0 everywhere else).
+	* Restored falcon_mouse example, since building is more stable
+	* Documented a whole bunch. Doxygen now puts out something resembling a manual.
+	* Decided it was time to kick out of the beta phase and just be done with v1.0.
+2009-05-17 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 beta 4
+	* Fixed include install directories (#15)
+	* Fixed include file listings so that they show up in Visual Studio projects (#9)
+	* Fixed program option printing (#18)
+	* Divided falcon_test_cli into multiple smaller tests
+	* Added color fading test to falcon_test_cli
+	* Added wall test to falcon_test_cli (#2)
+	* Changed internal implementation holding to use smart pointers instead of bare pointers (#12)
+	* Fixed double free bug in libusb (#21)
+	* Cleaned loop counting methods in falcon_test_cli (#19 #22)
+	* Added per-comm-target compiles for findfalcons test (#17)
+	* Added QPT timing calls for windows (#6)
+	* Updated gmtl to v0.6.0
+	* Added package file generation for pkg-config (Thanks to Stephen Sinclair)
+	* Removed unnecessary stdint.h types
+	* Added blocking read/write calls to comm libraries for loading firmware
+	* Fixed validity checks for firmware mode setting and firmware loading across all comm cores
+	* Fixed firmware existence checking, now much more reliable
+	* Changed all array passing to use boost::array instead of bare arrays
+	* Fixed FTD2XX comm library to make reading more stable
+2009-03-14 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 beta 3
+	* Overhauled CMake system because I didn't really know what I was doing with it the first time around (and may still not this time)
+	* Added logging capabilities using Apache's log4cxx library
+	* Removed C code completely, still available in repository (boneyard directory) but no longer distributed in source tarballs
+	* Rearranged src directory to only contain what used to be in cpp directory
+	* Added pregen'd angular matrix LUT header since it currently never changes but takes a bit of time to generate on some systems
+	* Added logging level options to FalconCLIBase
+	* Fixed lots of small bugs in findfalcons_cpp, FalconCLIBase, falcon_test_cli
+	* Fixed compiling in Visual Studio on windows (MinGW still works fine too)
+2008-12-06 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 beta 2
+	* Changed units in stamper kinematic core position readings from millimeters to meters
+	* Changed units in stamper kinematic core force values to newtons (now matches HDAL)
+	* Changed units in FalconGeometry to meters
+	* Updated falcon_test_cli to reflect unit changes
+	* Added many more comments, though still nothing in depth
+	* Removed falcon_mouse demo (many people have difficulty building and it doesn't work right, moved to own repository, http://www.github.com/qdot/libnifalcon_mouse)
+	* Fixed some const/reference passing arguments
+	* Changed comm libraries to use pointers and prototypes to remove necessity for comm includes in lib headers
+	* Fixed FTD2XX compatibility (comm driver hadn't been working in the past few releases)
+	* Fixed compilation and compatibility for windows (now using mingw as test compiler)
+2008-11-16 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 beta 1
+	* Added libusb-1.0 support for linux
+	* Rewrote packet building function in FirmwareNovintSDK class to deal with partial packets
+	* Added ENABLE_GPROF option to build with -pg for gprof profiling
+	* Added sample udev files for linux device setup
+	* Removed C-based libnifalcon libraries from default builds, since they're no longer being kept up
+	* Removed findfalcons_cpp from being installed, since falcon_test_cli is the useful one
+	* Fixed RPATH sets in cmake
+	* Added <cstring> includes for memcpy so builds work on Fedora
+	* Added loop timing test to falcon_test_cli
+	* Added cube test to falcon_test_cli (Thanks to Stephen Sinclair)
+	* Fixed stability issues in falcon_test_cli (Thanks to Stephen Sinclair)
+	* Added firmware loading from memory
+	* Added firmware as header includes
+	* Added bin2h python utility for firmware conversion
+	* Added nvent extracted firmware (considered to be 'release' firmware)
+	* Moved includes to include directory to mirror final install state
+	* Updated all libnifalcon includes to reflect proper full path
+2008-10-19 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 alpha 4
+	* More cmake file condensing
+	* Fixed comparison bug in FalconGripFourButton
+	* Added CPU specific optimizations for option for GCC builds
+	* Added Fast Math optimization option for GCC >= 4.0
+	* Added (but commented out) packet buffering scheme for firmware
+	* Fixed bug with returning grip info data portion from novint firmware object
+	* Fixed library misnaming for C libraries (Thanks to Stephen Sinclair)
+	* Removed automatic ftd2xx building from Mac and Linux due to symbol issues (now requires explicit CMake option setting - FORCE_FTD2XX_BUILD)
+	* Added cmake option for libusb debug messages (LIBUSB_DEBUG)
+	* Added execution flags to the FalconDevice runIOLoop function
+2008-10-11 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 alpha 3
+	* Overhauled cmake files to make building cleaner
+	* Renamed c libraries to libnifalcon_c
+	* Renamed c++ libraries to libnifalcon
+	* Added Findlibnifalcon cmake module
+	* Added GMTL to source distribution
+	* Folded Stamper kinematics functionality into main library
+2008-10-05 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 alpha 2
+	* Added beginnings of HDL compatibility libraries
+	* Added novint license since libnifalcon includes SDK code and firmware, which is covered under their license
+	* Added FindBoost cmake module from CMake 2.6.2.
+	* Fixed findfalcons_cpp demo compiling and double deletion bug
+2008-09-20 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v1 alpha 1
+	* Changed license to BSD
+	* Added new C++ based libnifalcon library
+	* Added kinematics classes by Kevin Ouellet
+	* Removed OpenGL examples for the moment
+	* Removed C based kinematics classes until they are corrected
+2008-08-20 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.5
+	* Fixed firmware initialization race condition that caused various loading issues
+	* Added check to see if firmware is already on the falcon
+	* Changed findfalcons output to make it slightly more usable
+	* Added more error reporting to test firmware
+2008-07-15 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.4
+	* Removed stray "_s" extensions in CMake files
+2008-05-26 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.3
+	* Fixed libftdi latency timer sets, library now runs much faster on Linux and OS X
+	* Added basic kinematics algorithms to do IK/DK placement calculations for the end effector
+	* Added OpenGL kinematics simulation for visualization
+2008-04-05 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.2
+	* Fixed input packet motor bit shifting error (Thanks to Michael Huang and Jared Allen)
+	* Added libftdi support for platforms where FTDI drivers are not available (64-bit Linux) or do not work properly (OS X, Linux)
+	* Added library checks for CMake to figure out what can and cannot be built
+	* Changed base device to a struct for extensibility
+	* Added non-printf error checking to clean up library
+	* Added lots of other stuff I'm probably forgetting here
+2008-02-17 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.1
+	* First release of libnifalcon project, includes source files and cmake build system
+2007-08-19 Kyle Machulis <kyle@nonpolynomial.com>
+	* Release v0.0.0.1
+	* Released basic python script documenting simple communication with device
