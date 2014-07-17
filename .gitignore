@@ -1,0 +1,8 @@
+*/Debug/*
+*/Release/*
+external_libs/boost_1_49_0/
+external_libs/bullet/
+*.opensdf
+*.sdf
+falconunity_vs2010/ipch/
+FalconServerTest/obj/

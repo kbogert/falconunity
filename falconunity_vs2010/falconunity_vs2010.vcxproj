@@ -50,12 +50,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;FALCONUNITY_VS2010_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\falconunity\external_libs\bullet\src;D:\falconunity\external_libs\boost_1_49_0;D:\falconunity\external_libs\novint_sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\falconunity\external_libs\bullet\src;C:\falconunity\external_libs\boost_1_49_0;C:\falconunity\external_libs\novint_sdk;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\kjohnsen\Desktop\falconunity\external_libs\boost_1_49_0\stage\lib;C:\Users\kjohnsen\Desktop\falconunity\external_libs\novint_sdk;C:\Users\kjohnsen\Desktop\falconunity\external_libs\bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>c:\falconunity\external_libs\boost_1_49_0\stage\lib;C:\falconunity\external_libs\novint_sdk;C:\falconunity\external_libs\bullet\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>BulletDynamics_debug.lib;BulletCollision_debug.lib;LinearMath_debug.lib;hdl.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>..\build\\debug\falconunity.dll</OutputFile>
       <ImportLibrary>..\build\debug\falconunity.lib</ImportLibrary>

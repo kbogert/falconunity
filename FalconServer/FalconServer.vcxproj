@@ -58,7 +58,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>..\build\debug\$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>D:\falconunity\build\Debug;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>c:\falconunity\build\Debug;</AdditionalLibraryDirectories>
       <AdditionalDependencies>falconunity.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
