@@ -4,13 +4,12 @@
 SceneSettings:
   m_ObjectHideFlags: 0
   m_PVSData: 
-  m_QueryMode: 1
   m_PVSObjectsArray: []
   m_PVSPortalsArray: []
   m_OcclusionBakeSettings:
-    viewCellSize: 1
-    bakeMode: 2
-    memoryUsage: 10485760
+    smallestOccluder: 5
+    smallestHole: .25
+    backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
   m_Fog: 0
@@ -23,6 +22,7 @@ RenderSettings:
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 0}
   m_ObjectHideFlags: 0
@@ -116,12 +116,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!135 &10546759
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -171,12 +174,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2801cdf06708c9439e8a0a8edc3cd50, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   falcon_num: 0
   button_states: 00000000
   constantforce: {x: 0, y: 0, z: 0}
   hapticTip: {fileID: 959501954}
   godObject: {fileID: 10546757}
-  godObjectMass: .00999999978
+  godObjectMass: .00100000005
   hapticTipToWorldScale: 50
   useMotionCompensator: 1
 --- !u!114 &716707345
@@ -190,6 +194,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bc0453d014ff424eb02e6af4d7a947f, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   num_falcons: 0
   gravity: {x: 0, y: 0, z: 0}
   address: localhost
@@ -311,12 +316,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!135 &959501956
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -380,12 +388,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &1061518348
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -415,7 +426,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee8f0a0f1e2c3d4ea3fe89b9e7c1224, type: 3}
   m_Name: 
-  k: .5
+  m_EditorClassIdentifier: 
+  k: .300000012
   mass: 1
   device_scale: {x: 1, y: 1, z: 1}
   linearFactors: {x: 0, y: 1, z: 0}
@@ -463,12 +475,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!135 &1138312146
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -509,7 +524,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
   m_Name: 
-  k: 1
+  m_EditorClassIdentifier: 
+  k: .200000003
   mass: 1
   device_scale: {x: 1, y: 1, z: 1}
   bodyId: 0
@@ -564,6 +580,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &1288578973
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -593,7 +612,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
   m_Name: 
-  k: .899999976
+  m_EditorClassIdentifier: 
+  k: .349999994
   mass: 0
   device_scale: {x: 1, y: 1, z: 1}
   bodyId: 0
@@ -642,12 +662,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &1744792078
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -677,8 +700,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
   m_Name: 
-  k: .5
-  mass: 50
+  m_EditorClassIdentifier: 
+  k: .00999999978
+  mass: 0
   device_scale: {x: 1, y: 1, z: 1}
   bodyId: 0
   linearFactors: {x: 1, y: 1, z: 1}
@@ -726,12 +750,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &1873165669
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -761,7 +788,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c8e0912ff0f4944cab150cc67528b4c, type: 3}
   m_Name: 
-  k: 1
+  m_EditorClassIdentifier: 
+  k: .25
   mass: 1
   device_scale: {x: 1, y: 1, z: 1}
   bodyId: 0
@@ -802,6 +830,10 @@ Prefab:
     - target: {fileID: 400002, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
+      propertyPath: godObjectMass
+      value: .00100000005
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 52925aea55b22e942bc50b7558584eda, type: 2}
@@ -851,12 +883,15 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &2080708820
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -886,7 +921,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dee8f0a0f1e2c3d4ea3fe89b9e7c1224, type: 3}
   m_Name: 
-  k: .5
+  m_EditorClassIdentifier: 
+  k: .00999999978
   mass: .100000001
   device_scale: {x: 1, y: 1, z: 1}
   linearFactors: {x: 0, y: 0, z: 0}
@@ -913,6 +949,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4646335d49a37d45bdab5d96e13b05d, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   speed: 60
   curRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &2083186193
@@ -977,6 +1014,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
+  m_OcclusionCulling: 1
 --- !u!81 &2083186196
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1008,6 +1046,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c09721219ec850f4ead80f5334bedf8f, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   mainSpeed: 1
   shiftAdd: 250
   maxShift: 1000
@@ -1022,6 +1061,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5eb5f68d568203e45aaa9b7a3ff95750, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2083186201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1032,3 +1072,4 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c1ebaf5133f40a4c94991a86cd6649a, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 

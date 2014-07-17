@@ -6,3 +6,4 @@ external_libs/bullet/
 *.sdf
 falconunity_vs2010/ipch/
 FalconServerTest/obj/
+UnityDemoProject/Library/

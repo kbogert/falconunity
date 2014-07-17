@@ -55,6 +55,7 @@ public class FalconRigidBody : MonoBehaviour {
 		}	
 		transform.localPosition = pos;
 		transform.localRotation = orient;
+		FalconUnity.updateDynamicShape(bodyId, mass, k, linearFactors, angularFactors, friction);
 	}
 	
 	static object Lock = new object();

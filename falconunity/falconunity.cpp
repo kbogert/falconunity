@@ -266,10 +266,13 @@ public:
 			// if not colided, decay restitution
 			// calc spring constant: k
 			if (! collideFlag) {
-				collideObjRestitution += .1f *  (1 - collideObjRestitution);
+				collideObjRestitution += .1f * (1 - collideObjRestitution);
 			}
 		
-			float distToMaxForce = (collideObjRestitution * (maxDistToMaxForceInMeters - minDistToMaxForceInMeters)) + minDistToMaxForceInMeters;
+			float distToMaxForce = collideObjRestitution * maxDistToMaxForceInMeters;
+
+			if (distToMaxForce == 0)
+				distToMaxForce = minDistToMaxForceInMeters * .00001;
 
 			float k = maxForce / distToMaxForce;
 		
