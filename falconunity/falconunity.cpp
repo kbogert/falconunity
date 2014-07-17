@@ -144,6 +144,9 @@ private:
 	float lerpTotalTime;
 	float lerpElapsedTime;
 
+	btScalar collideObjMass;
+	btScalar collideObjImpulse;
+
 public:
 	FalconInterface(HDLDeviceHandle falcon, float maxForceInNewtons) {
 		falconHandle = falcon;
@@ -177,6 +180,10 @@ public:
 		for (int i = 0; i < TOTAL_FRAMES; i ++) {
 			savedForces[i] = new btVector3(0,0,0);
 		}
+
+		collideObjMass = 1;
+		collideObjImpulse = 0;
+
 	}
 
 	void setGodObject (btRigidBody * godObject, float minToMaxForce, float maxToMaxForce, bool isSphere) {
@@ -303,6 +310,10 @@ public:
 					totalForce += *applyForceVector;
 					applyForceTimeLeft -= deltaT;
 				}
+				
+				if (collideObjMass == 0 && collideFlag) {
+					totalForce = distance.normalized() * collideObjImpulse /1000.0f;
+				}
 
 
 				// apply to God Object
@@ -351,9 +362,11 @@ public:
 
 	}
 
-	void setHasCollided(float restitution) {
+	void setHasCollided(float restitution, btScalar objectMass, btScalar appliedImpulse) {
 		collideFlag = true;
 		collideObjRestitution = 1.0f - restitution;
+		this->collideObjMass = objectMass;
+		this->collideObjImpulse = appliedImpulse;
 	}
 
 	btVector3 getPosition() {
@@ -1134,15 +1147,18 @@ void collisionCheckTickCallback(btDynamicsWorld *world, btScalar timeStep) {
 
 		int found = -1;
 		float rest = 0;
+		btScalar mass;
 		for (unsigned int k = 0; k < falconInterfaces.size(); k ++) {
 			btCollisionObject* test = falconInterfaces[k]->getGodObject();
 			if (test == obA) {
 				found = k;
 				rest = obB->getRestitution();
+				mass = obB->isStaticOrKinematicObject () ? 0 : 1;
 				break;
 			} else if (test == obB) {
 				found = k;
 				rest = obA->getRestitution();
+				mass = obA->isStaticOrKinematicObject () ? 0 : 1;
 				break;
 			} 
 		}
@@ -1155,7 +1171,7 @@ void collisionCheckTickCallback(btDynamicsWorld *world, btScalar timeStep) {
 			btManifoldPoint& pt = contactManifold->getContactPoint(j);
 			if (pt.getDistance()<=0.f)
 			{
-				falconInterfaces[found]->setHasCollided(rest);
+				falconInterfaces[found]->setHasCollided(rest, mass, pt.getAppliedImpulse());
 				break;
 			}
 		}
