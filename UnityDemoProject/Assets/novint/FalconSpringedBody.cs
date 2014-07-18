@@ -69,6 +69,7 @@ public class FalconSpringedBody : MonoBehaviour {
 		transform.localPosition = pos;
 		transform.localRotation = orient;
 
+		FalconUnity.updateDynamicShape(bodyId, mass, k, linearFactors, angularFactors, friction);
 
 		FalconUnity.lerpSpring(springId,max_force, dampingFactor, springPos,springOrientation,posConstraintLower,posConstraintUpper, orientConstraintCCW, orientConstraintCW, directionality, 0);
 //		FalconUnity.setSpring(springId,max_force,goalPos,goalOrient,pConstraintl,pConstraintu, oConstraintl, oConstraintu);
