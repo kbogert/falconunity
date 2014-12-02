@@ -208,7 +208,7 @@ public class FalconUnityCall {
 		return false;		
 	}
 	
-	// apply a static force to the god object every tick
+	// apply a static force to the haptic tip every tick
     public static void setForceField(int falcon_num, Vector3 force) {
         string returnval = "SETFORCEFIELD\n";
 
@@ -1103,7 +1103,7 @@ public class FalconUnityCall{
     public static extern bool getFalconForces(int falcon_num, float[] force_out);
 	
 
-	// apply a static force to the god object every tick
+	// apply a static force to the haptic tip every tick
 	[DllImport("falconunity")]
     public static extern bool setForceField(int falcon_num, float[] force); //set the falcon to send this constant force
 	
@@ -1251,7 +1251,7 @@ public class FalconUnityCall{
 		return returnval;
 	}
 	
-	// apply a static force to the god object every tick
+	// apply a static force to the haptic tip every tick
     public static void setForceField(int falcon_num, Vector3 force) {
 		
 		float [] f = new float[3] {force.x, force.y, force.z};
