@@ -9,6 +9,8 @@ For an example, see [here](http://www.screenr.com/baP7)
 Quick Setup
 -----------
 - Install the Novint Falcon on your machine, make sure it works
+  - Driver Download: https://www.novint.com/index.php/downloads
+- Install the Visual Studio 2013 runtime from https://www.microsoft.com/en-us/download/details.aspx?id=30679
 - Look in the releases section of this project, attached to the release is a binary build containing 3 files:
   - falconunity.dll
   - FalconServer.exe
@@ -36,8 +38,9 @@ Using without the server
 
 Notes for Building
 -----------
-- This project was/is built with Visual Studio 2010
+- This project was/is built with Visual Studio 2013
 - Clone the repository to c:\ (sorry :( )
 - Download the [Bullet library](http://bulletphysics.org/wordpress/) and place in c:\falconunity\external_libs\bullet
-- Download [Boost](http://www.boost.org/users/download/) and place in c:\falconunity\external_libs\boost_1_49_0
+  - Apply the fix here: http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=8915
+- Download [Boost](http://www.boost.org/users/download/) and place in c:\falconunity\external_libs\boost_1_58_0
 - Build the solution, the falconunity.dll and FalconServer.exe files will be in c:\falconunity\build\Release
