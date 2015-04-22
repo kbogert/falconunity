@@ -43,4 +43,4 @@ Notes for Building
 - Download the [Bullet library](http://bulletphysics.org/wordpress/) and place in c:\falconunity\external_libs\bullet
   - Apply the fix here: http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=8915
 - Download [Boost](http://www.boost.org/users/download/) and place in c:\falconunity\external_libs\boost_1_58_0
-- Build the solution, the falconunity.dll and FalconServer.exe files will be in c:\falconunity\build\Release
+- Build the solution that's in c:\falconunity\falconunity_vs2010, the falconunity.dll and FalconServer.exe files will be placed in c:\falconunity\build\Release
