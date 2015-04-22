@@ -42,5 +42,8 @@ Notes for Building
 - Clone the repository to c:\ (sorry :( )
 - Download the [Bullet library](http://bulletphysics.org/wordpress/) and place in c:\falconunity\external_libs\bullet
   - Apply the fix here: http://bulletphysics.org/Bullet/phpBB3/viewtopic.php?t=8915
+  - Follow bullet's build instructions to create a VS2010 solution and project
+  - Open this solution, change the runtime library to multi-threaded DLL for all of the projects to build (you can ignore the demos
+  - Rename the resulting libs to remove the _2010 in their name
 - Download [Boost](http://www.boost.org/users/download/) and place in c:\falconunity\external_libs\boost_1_58_0
 - Build the solution that's in c:\falconunity\falconunity_vs2010, the falconunity.dll and FalconServer.exe files will be placed in c:\falconunity\build\Release
