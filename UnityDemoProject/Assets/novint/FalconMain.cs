@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Text;
+using System.Net.Sockets;
+
 public class FalconMain : MonoBehaviour {
 	public int num_falcons;
 	private int my_num;
@@ -9,14 +11,15 @@ public class FalconMain : MonoBehaviour {
 	
 	public string address;
 	public int port;
-	
+    public AddressFamily protocol;
+
 	// Use this for initialization
 	void Awake () {
 		my_num = getNextNum();
 		
 		if (my_num == 0) {
-			Debug.Log(address + " " + port);
-			FalconUnity.setServerParams(address, port);
+			Debug.Log(address + " " + port + " " + protocol);
+			FalconUnity.setServerParams(address, port, protocol);
 			FalconUnity.Start();
 			
 			FalconUnity.Update();

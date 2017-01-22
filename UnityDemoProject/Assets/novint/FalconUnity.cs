@@ -3,11 +3,11 @@
 using UnityEngine;
 using System.Collections;
 using System.Text;
+using System.Net.Sockets;
 
 
 #if USE_REMOTE
 using System.Net;
-using System.Net.Sockets;
 using System;
 using System.Threading;
 
@@ -19,6 +19,7 @@ public class FalconUnityCall {
 	
 	private static string serverAddress;
 	private static int serverPort;
+    private static AddressFamily serverProtocol;
 	private static Socket serverSocket;
 	
 	private static float lastFPS;
@@ -63,10 +64,11 @@ public class FalconUnityCall {
 		}
 	}
 	
-	public static void setServerParams(string address, int port) {
+	public static void setServerParams(string address, int port, AddressFamily protocol) {
 		serverAddress = address;
 		serverPort = port;
-		
+        serverProtocol = protocol;
+
 		falconData = new Hashtable();
 		objData = new Hashtable();
 		springUpdates = new Hashtable();
@@ -760,12 +762,20 @@ public class FalconUnityCall {
 				serverSocket = null;
 			}
 		}
-		IPHostEntry ipHostInfo = Dns.Resolve(serverAddress);
-		IPAddress ipAddress = ipHostInfo.AddressList[0];
+		IPHostEntry ipHostInfo = Dns.GetHostEntry(serverAddress);
+        IPAddress ipAddress = null;
+        foreach (IPAddress ip in ipHostInfo.AddressList)
+        {
+            if (ip.AddressFamily == serverProtocol)
+            {
+                ipAddress = ip;
+                break;
+            }
+        }
         IPEndPoint remoteEP = new IPEndPoint(ipAddress,serverPort);
 
         // Create a TCP/IP  socket.
-        serverSocket = new Socket(AddressFamily.InterNetwork, 
+        serverSocket = new Socket(ipAddress.AddressFamily, 
                 SocketType.Stream, ProtocolType.Tcp );
 
 
@@ -998,12 +1008,20 @@ public class FalconUnityCall {
 							serverSocket = null;
 						}
 					}
-					IPHostEntry ipHostInfo = Dns.Resolve(serverAddress);
-					IPAddress ipAddress = ipHostInfo.AddressList[0];
+					IPHostEntry ipHostInfo = Dns.GetHostEntry(serverAddress);
+                    IPAddress ipAddress = null;
+                    foreach (IPAddress ip in ipHostInfo.AddressList)
+                    {
+                        if (ip.AddressFamily == serverProtocol)
+                        {
+                            ipAddress = ip;
+                            break;
+                        }
+                    }
 			        IPEndPoint remoteEP = new IPEndPoint(ipAddress,serverPort);
 			
 			        // Create a TCP/IP  socket.
-			        serverSocket = new Socket(AddressFamily.InterNetwork, 
+			        serverSocket = new Socket(ipAddress.AddressFamily, 
 	                SocketType.Stream, ProtocolType.Tcp );
 					
 					
@@ -1055,6 +1073,7 @@ public class FalconUnityCall {
 				
 			} catch (Exception e) {
 				setCurrentState(ConnectionState.Disconnected);
+                Debug.Log(e);
 			}
 			
 		}
@@ -1196,7 +1215,7 @@ public class FalconUnityCall{
 	
 	// Unity interface
 	
-	public static void setServerParams(string address, int port) {
+	public static void setServerParams(string address, int port, AddressFamily protocol) {
 	}
 	
 	// Start, Stop, Update, GetLastError are synchronous and immediate, all other methods place packets into a queue to be transmitted on next call to Update()
@@ -1422,8 +1441,8 @@ public class FalconUnity{
 	}
 
 	
-	public static void setServerParams(string address, int port) {
-		FalconUnityCall.setServerParams(address, port);
+	public static void setServerParams(string address, int port, AddressFamily protocol) {
+		FalconUnityCall.setServerParams(address, port, protocol);
 	}
 	
 	// Start, Stop, Update, GetLastError are synchronous and immediate, all other methods place packets into a queue to be transmitted on next call to Update()
