@@ -11,7 +11,7 @@ Quick Setup
 - Install the Novint Falcon on your machine, make sure it works
   - Driver Download: https://www.novint.com/index.php/downloads
 - Install the Visual Studio 2013 runtime from https://www.microsoft.com/en-us/download/details.aspx?id=40784
-- Look in the releases section of this project, attached to the release is a binary build containing 3 files:
+- Look in the releases section of this project, https://github.com/kbogert/falconunity/releases/tag/v0.22 , attached to the release is a zip of the binary build containing 3 files:
   - falconunity.dll
   - FalconServer.exe
   - FalconUnity.unitypackage
